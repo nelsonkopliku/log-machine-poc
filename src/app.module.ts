@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { MathController } from './controller/math.controller';
-import {RabbitMQClient} from './rabbit/rabbitmq-client';
+// import {RabbitMQClient} from './rabbit/rabbitmq-client';
 
 @Module({
   imports: [],
@@ -9,6 +9,6 @@ import {RabbitMQClient} from './rabbit/rabbitmq-client';
       AppController,
       MathController,
   ],
-  components: [RabbitMQClient],
+  // components: [RabbitMQClient],
 })
 export class AppModule {}

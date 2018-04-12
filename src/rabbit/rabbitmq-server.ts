@@ -38,7 +38,7 @@ export class RabbitMQServer extends Server implements CustomTransportStrategy {
 
         const handler = this.messageHandlers[pattern];
         const response$ = this.transformToObservable(await handler(messageObj.data)) as Observable<any>;
-        response$ && this.send(response$, (data) => this.sendMessage(data));
+        // response$ && this.send(response$, (data) => this.sendMessage(data));
     }
 
     private sendMessage(message) {
@@ -49,7 +49,7 @@ export class RabbitMQServer extends Server implements CustomTransportStrategy {
     private async init() {
         this.server = await connect(this.host);
         this.channel = await this.server.createChannel();
-        this.channel.assertQueue(`${this.queue}_sub`, { durable: false });
-        this.channel.assertQueue(`${this.queue}_pub`, { durable: false });
+        this.channel.assertQueue(`${this.queue}_sub`);
+        // this.channel.assertQueue(`${this.queue}_pub`, { durable: false });
     }
 }

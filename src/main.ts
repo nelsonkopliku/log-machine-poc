@@ -1,8 +1,5 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import {Transport} from '@nestjs/microservices';
-import {MathMicroservice} from './microservices/math-microservice';
-import {RabbitMQMicroservice} from './microservices/rabbitmq-microservice';
 
 import { config } from 'dotenv';
 import {RabbitMQServer} from './rabbit/rabbitmq-server';
@@ -10,7 +7,6 @@ import {RabbitMQServer} from './rabbit/rabbitmq-server';
 async function bootstrap() {
   config();
   const app = await NestFactory.create(AppModule);
-  // app.connectMicroservice(MathMicroservice);
   app.connectMicroservice({
       strategy: new RabbitMQServer(process.env.RABBIT_URL, process.env.QUEUE_PREFIX),
   });
